@@ -66,3 +66,4 @@ seaborn
 latex
 datasets
 aiohttp
+skypilot==0.5.0

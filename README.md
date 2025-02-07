@@ -25,7 +25,7 @@ To address this, we propose a simple yet efficient policy, SpotHedge, that lever
 
 ## Preparation
 
-The SkyServe and SpotHedge related code has been merged to [SkyPilot](https://github.com/skypilot-org/skypilot). 
+The SkyServe and SpotHedge related code is available on [SkyPilot](https://github.com/skypilot-org/skypilot/tree/spot-hedge-new).
 
 ```bash
 pip install -r requirements.txt
@@ -42,13 +42,6 @@ cd e2e/plot
 
 # Decompress the data zip file.
 unzip spot-hedge-ae-raw-data.zip
-
-# Optionally: create a new virtual environment.
-conda create python=3.10 --name spot-hedge-ae-plot
-conda activate spot-hedge-ae-plot
-
-# Install dependencies.
-pip install -r requirements.txt
 
 # Run the scripts to generate figures.
 python3 draw-misc.py            # Figure 6
