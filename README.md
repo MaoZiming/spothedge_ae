@@ -27,7 +27,7 @@ To address this, we propose a simple yet efficient policy, SpotHedge, that lever
 
 The SkyServe and SpotHedge related code is available on [SkyPilot](https://github.com/skypilot-org/skypilot/tree/spot-hedge-new).
 
-To install from source, follow [Installation](https://docs.skypilot.co/en/latest/getting-started/installation.html).
+To install from source, follow [Installation](https://docs.skypilot.co/en/latest/getting-started/installation.html) and use the `spot-hedge-new` branch.
 
 ## Macrobenchmarks
 
