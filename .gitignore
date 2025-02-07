@@ -1,0 +1,16 @@
+*__pycache__*
+# results
+old
+.mypy_cache
+workloads/maf2/raw_data
+workloads/maf1/raw_data
+trace_logs
+results_old
+results_old_Dec_2nd
+results/*
+e2e/plot/client_data
+e2e/plot/data
+e2e/plot/pic
+workdir
+*.tar.xz
+skypilot

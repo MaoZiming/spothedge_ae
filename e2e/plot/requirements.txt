@@ -1,0 +1,4 @@
+matplotlib
+seaborn
+numpy
+skypilot==0.5.0

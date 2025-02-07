@@ -1,0 +1,13 @@
+resources:
+  cloud: gcp
+  cpus: 16
+
+workdir: .
+
+envs:
+  HF_TOKEN: hf_xx
+
+setup: |
+  pip install datasets
+  pip install -r requirements.txt
+  python -c "import huggingface_hub; huggingface_hub.login('${HF_TOKEN}')"

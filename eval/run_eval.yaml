@@ -1,0 +1,14 @@
+name: run-eval
+
+workdir: .
+
+resources:
+  cloud: gcp
+  cpus: 64
+
+setup: |
+  pip3 install -r requirements.txt
+
+run: |
+  set -e
+  python3 -m eval.eval --num-repeats 10 --total-time-period 2880
