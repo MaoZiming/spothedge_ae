@@ -1,5 +1,4 @@
 resources:
-  cloud: gcp
   cpus: 16
 
 workdir: .
