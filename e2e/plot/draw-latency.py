@@ -29,7 +29,7 @@ def _get_figure_name_in_paper(spot_avail: str, replica: str, is_latency: bool):
         subfigure = "a" if spot_avail == "available" else "b"
     else:
         subfigure = "c" if spot_avail == "available" else "d"
-    figure_num = 9 if replica == "vllm" else 12
+    figure_num = 9 if replica == "vllm" else 13
     return f"Figure {figure_num}({subfigure})", f"pic/fig-{figure_num}-{subfigure}.pdf"
 
 
@@ -134,7 +134,7 @@ def main(spot_avail: str, replica: str):
 
     def _get_tag(exp: str):
         alias = {
-            "spot-hedge": "Spot\nHedge",
+            "spot-hedge": "Sky\nServe",
             "mark": "MArk",
             "aws-autoscaling-mixed": "ASG",
             "aws-autoscaling-pure-spot": "AWS\nSpot",
@@ -176,7 +176,8 @@ def main(spot_avail: str, replica: str):
                     meanprops=meanprops,
                     widths=0.7,
                     patch_artist=True,
-                    boxprops=dict(facecolor="white", edgecolor=palette[i]),
+                    # boxprops=dict(facecolor="white", edgecolor=palette[i]),
+                    boxprops=dict(facecolor="white", edgecolor="black"),
                     medianprops=medianprops,
                     hue=tags,
                     legend=False,
@@ -227,7 +228,7 @@ def main(spot_avail: str, replica: str):
         for p in ax2.patches:
             height = p.get_height()
             width = p.get_width()
-            label = f"{height:.2%}"
+            label = f"{height * 100:.2g}%"
             ax2.text(p.get_x() + width / 2, height, label, ha="center", va="bottom")
 
         ax2.spines["right"].set_visible(False)
