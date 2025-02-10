@@ -333,7 +333,7 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
 
     def _get_tag(exp: str):
         alias = {
-            "spot-hedge": "Spot\nHedge",
+            "spot-hedge": "Sky\nServe",
             "mark": "MArk",
             "aws-autoscaling-mixed": "ASG",
             "aws-autoscaling-pure-spot": "AWS\nSpot",

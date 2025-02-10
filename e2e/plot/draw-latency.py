@@ -134,7 +134,7 @@ def main(spot_avail: str, replica: str):
 
     def _get_tag(exp: str):
         alias = {
-            "spot-hedge": "Spot\nHedge",
+            "spot-hedge": "Sky\nServe",
             "mark": "MArk",
             "aws-autoscaling-mixed": "ASG",
             "aws-autoscaling-pure-spot": "AWS\nSpot",
