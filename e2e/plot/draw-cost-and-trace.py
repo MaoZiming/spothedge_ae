@@ -601,7 +601,7 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
             ax_to_use.legend().set_visible(False)
             ax_to_use.xaxis.grid(False)
             ax_to_use.yaxis.grid(False)
-            ax_to_use.set_ylabel(_get_tag(exp), fontsize=font_size)
+            ax_to_use.set_ylabel(_get_tag(exp), fontsize=font_size - 1)
         legend_elements = []
         for name in ["on_demand", "spot"]:
             label = namealias[name]
@@ -651,7 +651,7 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
             height = od_costs[i] + spot_costs[i]
             width = p.get_width()
             if plot_percentage:
-                label = f"{height:.1%}"
+                label = f"{height*100:.2g}%"
             else:
                 label = f"{int(height)}"
             ax.text(p.get_x() + width / 2, height, label, ha="center", va="bottom")

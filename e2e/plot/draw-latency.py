@@ -176,7 +176,8 @@ def main(spot_avail: str, replica: str):
                     meanprops=meanprops,
                     widths=0.7,
                     patch_artist=True,
-                    boxprops=dict(facecolor="white", edgecolor=palette[i]),
+                    # boxprops=dict(facecolor="white", edgecolor=palette[i]),
+                    boxprops=dict(facecolor="white", edgecolor="black"),
                     medianprops=medianprops,
                     hue=tags,
                     legend=False,
@@ -227,7 +228,7 @@ def main(spot_avail: str, replica: str):
         for p in ax2.patches:
             height = p.get_height()
             width = p.get_width()
-            label = f"{height:.2%}"
+            label = f"{height * 100:.2g}%"
             ax2.text(p.get_x() + width / 2, height, label, ha="center", va="bottom")
 
         ax2.spines["right"].set_visible(False)
