@@ -31,6 +31,8 @@ To install from source, follow [Installation](https://docs.skypilot.co/en/latest
 
 ## Macrobenchmarks
 
+Due to budget constraints, we are unable to provide cloud credits to run the end-to-end experiments (each run of the experiments costs several thousand dollars). We do provide all raw data for our e2e experiments and scripts to reproduce all figures, which can be done at a local computer. Reviewers are welcome to test out SkyServe and SpotHedge with cloud accounts.
+
 All scripts to reproduce the figures in Macrobenchmarks are in `e2e/plot/`.
 
 Artifact evaluators can reproduce all figures by following those steps:
@@ -56,7 +58,14 @@ mkdir results
 sky launch eval/run_eval.yaml
 ```
 
-See results in `results/` directory.
+See results in `results/` directory. We provide the results we got before in Google Drive [link](https://drive.google.com/drive/folders/1jMzGYDAK0aNs2AkujSuvC4gMRX1CyM77?usp=sharing). 
+
+To plot the figures, run
+```bash
+cd plots
+./plot_figures.sh
+```
+See the figures in `plots/figures`. 
 
 ## Person of contact
 
