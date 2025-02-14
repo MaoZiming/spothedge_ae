@@ -1,5 +1,4 @@
 resources:
-  cloud: gcp
   cpus: 16
 
 workdir: .
@@ -11,3 +10,10 @@ setup: |
   pip install datasets
   pip install -r requirements.txt
   python -c "import huggingface_hub; huggingface_hub.login('${HF_TOKEN}')"
+
+run: |
+  python3 -m e2e.client.client_real_requests \
+    --run-time 86400 --host {host} --port {port} \
+    --desc spot-hedge-e2e-client \
+    --arena-trace-scale 15 \
+    --seed 0 --group exp-group-0
