@@ -277,7 +277,7 @@ palette = sns.color_palette("colorblind", n_colors=10)
 
 name2style = {
     "total": "-",
-    "spot": "-",
+    "spot": "--",
     "spot_total": "-.",
     "on_demand": "-",
 }
@@ -410,11 +410,12 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
         ax_to_use = plt.gca()
         legend_elements = []
         for name, (xaxis, yaxis) in data_to_use.items():
-            style = (
-                "-"
-                if exp in ["aws-autoscaling-pure-spot", "mark"]
-                else name2style[name]
-            )
+            # style = (
+            #     "-"
+            #     if exp in ["aws-autoscaling-pure-spot", "mark"]
+            #     else name2style[name]
+            # )
+            style = name2style[name]
             linewidth = 1.5 if not aggregate_groups else 1
             sns.lineplot(
                 x=xaxis,
@@ -656,7 +657,7 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
                 label = f"{int(height)}"
             ax.text(p.get_x() + width / 2, height, label, ha="center", va="bottom")
 
-        ax.bar(parsed_exps, spot_costs, label="Spot", color=name2color["spot"])
+        ax.bar(parsed_exps, spot_costs, label="Spot", color=name2color["spot"], hatch='///')
         if plot_percentage:
             ax.set_ylabel("Cost (%)", fontsize=font_size)
             yticks = [0, 0.2, 0.4, 0.6, 0.8, 1]
@@ -706,6 +707,19 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
         if aggregate_groups and len(all_group) > 1:
             prepare_od_cost_from_client(OD_EXP_NAME)
             draw_cost(plot_percentage=True)
+            # maybe_sppot_serve_prefix = 'spot_serve_' if USE_T4_COST else ''
+            # with open(f'output_cost_{maybe_sppot_serve_prefix}{"_".join(all_group)}.txt', 'w') as f:
+            #     spot_hedge_price_tot = exp2price["spot-hedge"][0] + exp2price["spot-hedge"][1]
+            #     for exp in exps:
+            #         exp_price_tot = exp2price[exp][0] + exp2price[exp][1]
+            #         print(f'Spot Price for {exp}: {exp2price[exp][0]:.2f} USD', file=f)
+            #         print(f'OnDemand Price for {exp}: {exp2price[exp][1]:.2f} USD', file=f)
+            #         print(f'Total Price for {exp}: {exp_price_tot:.2f} USD', file=f)
+            #         print(f'SpotHedge Price / Current Price for {exp}: {(spot_hedge_price_tot) / (exp_price_tot):.2f}', file=f)
+            #         print(f'SpotHedge lower cost by {(1 - (spot_hedge_price_tot) / (exp_price_tot)):.2f}', file=f)
+            #         print(f'{exp} lower cost by {(1 - (exp_price_tot) / (spot_hedge_price_tot)):.2f}', file=f)
+            #         print(file=f)
+            #     print(f'Total price: {sum([v[0] + v[1] for v in exp2price.values()]):.2f} USD', file=f)
 
     draw()
 
@@ -714,12 +728,13 @@ if __name__ == "__main__":
     os.makedirs("pic", exist_ok=True)
 
     # cost, vllm
-    main(["f4", "f7"], use_t4_cost=False)
-    main(["f5", "f6"], use_t4_cost=False)
+    # main(["f4", "f7"], use_t4_cost=False)
+    # main(["f5", "f6"], use_t4_cost=False)
 
     # num node to time
     main(["f4"])
     main(["f6"])
+    exit()
 
     # spot total
     main(["f5"], aggregate_groups=False)

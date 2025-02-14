@@ -132,6 +132,51 @@ def main(spot_avail: str, replica: str):
 
     frs = [exp2failure[exp] / exp2total[exp] for exp in exp2total.keys()]
 
+    # if replica == "vllm":
+    #     maybe_ss = 'spot_serve_' if use_spot_serve else ''
+    #     fn = f'output_{maybe_ss}{"_".join(groups_to_draw)}.txt'
+    #     with open(fn, 'w') as f:
+    #         pass
+    #     def _get_latencies_with_failure(exp):
+    #         latencies = exp2latencies[exp][:]
+    #         latencies += [FAILED_THRESHOLD_SECONDS] * exp2failure[exp]
+    #         return latencies
+    #     all_p50 = []
+    #     all_p90 = []
+    #     all_p99 = []
+    #     for exp, _ in exp2latencies.items():
+    #         if exp == "spot-hedge":
+    #             continue
+    #         latencies = _get_latencies_with_failure(exp)
+    #         mean_latency = np.mean(latencies)
+    #         p50_latency = np.percentile(latencies, 50)
+    #         p90_latency = np.percentile(latencies, 90)
+    #         p99_latency = np.percentile(latencies, 99)
+    #         p999_latency = np.percentile(latencies, 99.9)
+    #         all_p50.append(p50_latency / np.percentile(_get_latencies_with_failure("spot-hedge"), 50))
+    #         all_p90.append(p90_latency / np.percentile(_get_latencies_with_failure("spot-hedge"), 90))
+    #         all_p99.append(p99_latency / np.percentile(_get_latencies_with_failure("spot-hedge"), 99))
+    #         with open(fn, 'a') as f:
+    #             print(f'[{exp}]', file=f)
+    #             print(f'Mean: {mean_latency:.2f}s, Diff: {mean_latency / np.mean(_get_latencies_with_failure("spot-hedge")) * 100:.2f}%', file=f)
+    #             p50_ratio = p50_latency / np.percentile(_get_latencies_with_failure("spot-hedge"), 50)
+    #             print(f'P50: {p50_latency:.2f}s, Diff: {p50_ratio * 100:.2f}%', file=f)
+    #             p90_ratio = p90_latency / np.percentile(_get_latencies_with_failure("spot-hedge"), 90)
+    #             print(f'P90: {p90_latency:.2f}s, Diff: {p90_ratio * 100:.2f}%', file=f)
+    #             p99_ratio = p99_latency / np.percentile(_get_latencies_with_failure("spot-hedge"), 99)
+    #             print(f'P99: {p99_latency:.2f}s, Diff: {p99_ratio * 100:.2f}%', file=f)
+    #             p999_ratio = p999_latency / np.percentile(_get_latencies_with_failure("spot-hedge"), 99.9)
+    #             # print(f'P999: {p999_latency:.2f}s, Diff: {p999_ratio * 100:.2f}%')
+    #             print('99 90 50', file=f)
+    #             print(f'by ${p99_ratio:.2f}\\times$, ${p90_ratio:.2f}\\times$ and ${p50_ratio:.2f}\\times$', file=f)
+    #             print('50 90 99', file=f)
+    #             print(f'by ${p50_ratio:.2f}\\times$, ${p90_ratio:.2f}\\times$ and ${p99_ratio:.2f}\\times$', file=f)
+    #             print(file=f)
+    #     with open(fn, 'a') as f:
+    #         print(f'all_p50: {[float(x) for x in all_p50]}', file=f)
+    #         print(f'all_p90: {[float(x) for x in all_p90]}', file=f)
+    #         print(f'all_p99: {[float(x) for x in all_p99]}', file=f)
+
     def _get_tag(exp: str):
         alias = {
             "spot-hedge": "Sky\nServe",

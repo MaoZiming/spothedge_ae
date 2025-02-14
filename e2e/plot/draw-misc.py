@@ -24,7 +24,7 @@ def draw_latency_breakdown():
     
     # Create stacked bar
     bottom = 0
-    colors = sns.color_palette("viridis", n_colors=3)
+    colors = sns.color_palette("deep", n_colors=3)
     bars = []
     for i, (time, color) in enumerate(zip(times, colors)):
         bar = ax.bar(0.5, time, bottom=bottom, width=0.5, color=color) # Increased width from 0.15 to 0.3
@@ -65,26 +65,25 @@ def draw_latency_breakdown():
 
 
 def draw_cross_region_latency():
-    data = [
+    raw_data = [
         ["0.341", "101.681", "124.096", "137.122"],
         ["101.614", "0.250", "221.576", "200.108"],
         ["124.156", "221.539", "0.269", "256.260"],
         ["137.121", "200.145", "256.468", "0.304"],
     ]
+    data = raw_data
     data = np.array(data, dtype=float)
     regions = ["us", "eu", "asia", "sa"]
     FONT_SIZE = 14
 
     sns.set()
     plt.figure(figsize=(5, 4))
-    import matplotlib.figure
 
-    matplotlib.figure.Figure.colorbar
     sns.heatmap(
         data,
         annot=True,
         annot_kws={"size": FONT_SIZE},
-        fmt=".2f",
+        fmt=".1f",
         linewidths=0.5,
         square=True,
         cbar_kws={"format": "%.0fms"},
