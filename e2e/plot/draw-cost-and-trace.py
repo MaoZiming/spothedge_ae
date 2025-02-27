@@ -277,7 +277,7 @@ palette = sns.color_palette("colorblind", n_colors=10)
 
 name2style = {
     "total": "-",
-    "spot": "-",
+    "spot": "--",
     "spot_total": "-.",
     "on_demand": "-",
 }
@@ -333,7 +333,7 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
 
     def _get_tag(exp: str):
         alias = {
-            "spot-hedge": "Spot\nHedge",
+            "spot-hedge": "Sky\nServe",
             "mark": "MArk",
             "aws-autoscaling-mixed": "ASG",
             "aws-autoscaling-pure-spot": "AWS\nSpot",
@@ -410,11 +410,7 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
         ax_to_use = plt.gca()
         legend_elements = []
         for name, (xaxis, yaxis) in data_to_use.items():
-            style = (
-                "-"
-                if exp in ["aws-autoscaling-pure-spot", "mark"]
-                else name2style[name]
-            )
+            style = name2style[name]
             linewidth = 1.5 if not aggregate_groups else 1
             sns.lineplot(
                 x=xaxis,
@@ -470,9 +466,9 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
                 is_mark = exp == "mark" and group == "f5"
                 if is_awsspot or is_mark:
                     subfigure = "a" if is_mark else "b"
-                    fn = f"pic/fig-11-{subfigure}.pdf"
+                    fn = f"pic/fig-12-{subfigure}.pdf"
                     fig.savefig(fn, bbox_inches="tight")
-                    print(f"Figure 11({subfigure}) saved to {fn}")
+                    print(f"Figure 12({subfigure}) saved to {fn}")
 
     def calc_min_x_from_client_data(exp):
         min_x = float("inf")
@@ -601,7 +597,7 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
             ax_to_use.legend().set_visible(False)
             ax_to_use.xaxis.grid(False)
             ax_to_use.yaxis.grid(False)
-            ax_to_use.set_ylabel(_get_tag(exp), fontsize=font_size)
+            ax_to_use.set_ylabel(_get_tag(exp), fontsize=font_size - 1)
         legend_elements = []
         for name in ["on_demand", "spot"]:
             label = namealias[name]
@@ -651,12 +647,12 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
             height = od_costs[i] + spot_costs[i]
             width = p.get_width()
             if plot_percentage:
-                label = f"{height:.1%}"
+                label = f"{height*100:.2g}%"
             else:
                 label = f"{int(height)}"
             ax.text(p.get_x() + width / 2, height, label, ha="center", va="bottom")
 
-        ax.bar(parsed_exps, spot_costs, label="Spot", color=name2color["spot"])
+        ax.bar(parsed_exps, spot_costs, label="Spot", color=name2color["spot"], hatch='///')
         if plot_percentage:
             ax.set_ylabel("Cost (%)", fontsize=font_size)
             yticks = [0, 0.2, 0.4, 0.6, 0.8, 1]
@@ -681,7 +677,7 @@ def main(all_group, aggregate_groups=True, use_t4_cost=False):
         ax.spines["right"].set_visible(False)
         ax.spines["left"].set_visible(False)
         plt.tight_layout()
-        figure_num = 12 if USE_T4_COST else 9
+        figure_num = 13 if USE_T4_COST else 9
         subfigure = "e" if all_group == ["f4", "f7"] else "f"
         fn = f"pic/fig-{figure_num}-{subfigure}.pdf"
         fig.savefig(fn, bbox_inches="tight")

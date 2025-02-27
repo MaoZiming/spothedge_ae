@@ -85,6 +85,7 @@ def InitMatplotlib(font_size, title_size=9):
         # http://phyletica.org/matplotlib-fonts/
         # Important for cam-ready (otherwise some fonts are not embedded):
         "pdf.fonttype": 42,
+        "ps.fonttype": 42,
         "lines.linewidth": 1,
         # Styling.
         # 'grid.color': '#dedddd',
